@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.naturassp.services.exceptions.ObjectNotFoundException;
 import br.com.rafael.naturassp.dao.ProdutoDao;
 import br.com.rafael.naturassp.model.Categoria;
 import br.com.rafael.naturassp.model.Produto;
@@ -45,7 +46,13 @@ public class ProdutoSeviceImpl implements IProdutoService {
 
 	@Override
 	public ArrayList<Produto> listarTodos() {
-            return (ArrayList<Produto>) produtoDao.findAll();
+		try {
+			return (ArrayList<Produto>) produtoDao.findAll();
+		} catch (ObjectNotFoundException e) {
+			throw new ObjectNotFoundException("Erro ao listar Todos os Produtos" + e.getMessage());
+			
+		}
+            
 	}
 
 	@Override
@@ -68,6 +75,11 @@ public class ProdutoSeviceImpl implements IProdutoService {
 	@Override
 	public ArrayList<Produto> listarIndisponiveis() {
 		return produtoDao.findAllByDisponivel(0);
+	}
+
+	@Override
+	public Produto listaProdutoPorId(int idProduto) {
+		return produtoDao.findById(idProduto).orElseThrow(()-> new ObjectNotFoundException("Erro ao Buscar o Produto de id" + idProduto) );
 	}
 
 }
