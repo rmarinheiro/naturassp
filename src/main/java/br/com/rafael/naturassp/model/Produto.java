@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="tbl_produto")
@@ -19,6 +20,7 @@ public class Produto {
 	private Integer id;
 	
 	@Column(name = "nome_produto", length = 100 , nullable = false)
+	@Size(min = 2 , max = 100, message = "O Nome do produto deve ter entre 2 à 100 caracteres")
 	private String nome;
 	
 	@Column(name = "descricao_produto", length = 200,nullable = false)
@@ -28,6 +30,7 @@ public class Produto {
 	private String link;
 	
 	@Column(name="preco")
+	
 	private Double preco;
 	
 	@Column(name="disponivel", length = 1, nullable = false)

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import br.com.naturassp.services.exceptions.FileNotFoundException;
 import br.com.naturassp.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
@@ -20,6 +21,17 @@ public class ResourceExceptionHandler {
 		error.setMessage(e.getMessage());
 		error.setPath(request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+	}
+	
+	@ExceptionHandler(FileNotFoundException.class)
+	public ResponseEntity<StandardError> fileNotFoundException(FileNotFoundException e, HttpServletRequest request){
+		StandardError error = new StandardError();
+		error.setStatus(HttpStatus.BAD_REQUEST.value());
+		error.setError("File Exception");
+		error.setMessage(e.getMessage());
+		error.setPath(request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+		
 	}
 
 }

@@ -9,6 +9,8 @@ import java.nio.file.StandardCopyOption;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.naturassp.services.exceptions.FileNotFoundException;
+
 @Component
 public class UpLoadServiceImpl implements IUploadService {
 
@@ -27,9 +29,9 @@ public class UpLoadServiceImpl implements IUploadService {
 			System.out.println("DEBUG -- Arquivo copiado");
 			return path.toString();
 		} catch (Exception ex) {
-			System.out.println("Ocorreu erro ao carregar a imagem" + ex.getMessage());
+			throw new FileNotFoundException("Ocorreu um erro ao carregar a imagem" + ex.getMessage() );
+			
 		}
-		return null;
 	}
 
 }

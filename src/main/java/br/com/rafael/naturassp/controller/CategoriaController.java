@@ -2,6 +2,8 @@ package br.com.rafael.naturassp.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,7 @@ public class CategoriaController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Categoria> adicionarNova(@RequestBody Categoria categoria){
+	public ResponseEntity<Categoria> adicionarNova( @Valid @RequestBody Categoria categoria){
 		Categoria cat = service.inserirNovaCategoria(categoria);
 		if(cat != null) {
 			return ResponseEntity.status(201).body(cat);

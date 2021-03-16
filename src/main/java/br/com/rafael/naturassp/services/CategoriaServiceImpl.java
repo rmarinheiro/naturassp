@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.naturassp.services.exceptions.ObjectNotFoundException;
 import br.com.rafael.naturassp.dao.CategoriaDao;
 import br.com.rafael.naturassp.model.Categoria;
 
@@ -50,8 +51,13 @@ public class CategoriaServiceImpl  implements ICategoriaService{
 
 	@Override
 	public ArrayList<Categoria> recuperarPorPalavraChave(String palavraChave) {
-		if(palavraChave != null) {
-			return categoriaDao.findByNomeContaining(palavraChave);
+		try {
+			if(palavraChave != null) {
+				return categoriaDao.findByNomeContaining(palavraChave);
+			}
+			
+		} catch (Exception e) {
+			throw new ObjectNotFoundException("Objeto não encontrado pela palavra chave" + palavraChave );
 		}
 		
 		return null;
