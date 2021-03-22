@@ -21,7 +21,7 @@ public class Usuario {
 	private String username;
 	
 	@Column(name = "email",length = 50, nullable = false, unique = true)
-	@Email
+	@Email(message = "Entre com email válido")
 	private String email;
 	
 	@Column(name = "senha",length = 100,nullable = false)

@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.PastOrPresent;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -26,6 +27,7 @@ public class Pedido {
 	private Integer idPedido;
 	
 	@Column(name="data_pedido",nullable = false)
+	@PastOrPresent(message = "A data do pedido não deve ser futura")
 	private LocalDate dataPedido;
 	
 	@Column(name="valor_total",nullable = false)

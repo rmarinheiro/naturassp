@@ -1,5 +1,7 @@
 package br.com.rafael.naturassp.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +20,7 @@ public class PedidoController {
 	private IPedidoService service;
 	
 	@PostMapping
-	public ResponseEntity<Pedido> inserirNovoPedido(@RequestBody Pedido pedido){
+	public ResponseEntity<Pedido> inserirNovoPedido(@Valid @RequestBody Pedido pedido){
 		pedido = service.inserirNovo(pedido);
 		if(pedido != null) {
 			return ResponseEntity.status(201).body(pedido);

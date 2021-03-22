@@ -2,6 +2,8 @@ package br.com.rafael.naturassp.controller;
 
 import java.util.ArrayList;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class ProdutoController {
 	private IUploadService upload;
 	
 	@PostMapping
-	public ResponseEntity<Produto> novoProduto(@RequestBody Produto produto){
+	public ResponseEntity<Produto> novoProduto(@Valid @RequestBody Produto produto){
 		try {
 			service.inserirNovoProduto(produto);
 			return ResponseEntity.status(201).body(produto);

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -30,7 +31,7 @@ public class Produto {
 	private String link;
 	
 	@Column(name="preco")
-	
+	@Positive(message = "O campo preço deve ser positivo")
 	private Double preco;
 	
 	@Column(name="disponivel", length = 1, nullable = false)
