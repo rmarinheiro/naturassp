@@ -1,5 +1,7 @@
 package br.com.rafael.naturassp.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +29,12 @@ public class Cliente {
 	
 	@Column(name="telefone",nullable = false,length = 20)
 	private String telefone;
+	
+	@Column(name="data_nasc")
+	private LocalDate dataNasc;
+	
+	@Column(name="cpf_cliente", nullable = false,length = 15)
+	private String cpf;
 	
 	@Column(name="cep",nullable = false)
 	private String cep;
@@ -79,6 +87,16 @@ public class Cliente {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getCep() {
@@ -136,6 +154,16 @@ public class Cliente {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
+	public LocalDate getDataNasc() {
+		return dataNasc;
+	}
+
+	public void setDataNasc(LocalDate dataNasc) {
+		this.dataNasc = dataNasc;
+	}
+	
+	
 	
 
 	

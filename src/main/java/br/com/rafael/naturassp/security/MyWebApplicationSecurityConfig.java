@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AnyRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -18,9 +19,23 @@ public class MyWebApplicationSecurityConfig extends WebSecurityConfigurerAdapter
 		
 		httpSecurity.csrf().disable()
 					.authorizeRequests()
+					//requisições liberadas
+					.antMatchers(HttpMethod.GET,"/categorias").permitAll()
+					.antMatchers(HttpMethod.GET,"/categorias/search").permitAll()
+					.antMatchers(HttpMethod.GET,"/cliente/*").permitAll()
+					
+					.antMatchers(HttpMethod.POST,"/pedido").permitAll()
+					
 					.antMatchers("/produto").permitAll()
+					
 					.antMatchers(HttpMethod.POST,"/login").permitAll()
-					.anyRequest().authenticated();
+					
+					.antMatchers(HttpMethod.GET,"/produto").permitAll()
+					.antMatchers(HttpMethod.GET,"/produto/categoria/*").permitAll()
+					.antMatchers(HttpMethod.GET,"/produto/*").permitAll()
+					.antMatchers(HttpMethod.GET,"/produto/busca").permitAll()
+					//.anyRequest().permitAll();
+					.anyRequest().authenticated().and().cors();
 		
 		httpSecurity.addFilterBefore(new TokenFilter(),UsernamePasswordAuthenticationFilter.class);
 		

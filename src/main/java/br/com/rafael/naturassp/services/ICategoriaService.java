@@ -17,5 +17,12 @@ public interface ICategoriaService {
 	
 	//Metodo responsavel por recuperar categoria por palavra chave
 	public ArrayList<Categoria> recuperarPorPalavraChave(String palavraChave);
+	
+	//recupera uma unica categoria
+	public Categoria recuperarPorId(int id);
+	
+	//recupera todas as categorias por Id
+	public ArrayList<Categoria> recuperarTodasOrdenadasPorId();
+	
 
 }

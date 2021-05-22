@@ -20,5 +20,9 @@ public interface IProdutoService {
 	public ArrayList<Produto> listaPorCategoria(Categoria cat);
 	
 	public Produto listaProdutoPorId(int idProduto);
+	
+	public ArrayList<Produto> listarDestaques();
+	
+	public ArrayList<Produto> listarPorPalavraChave(String key);
 
 }

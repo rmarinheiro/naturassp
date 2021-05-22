@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.naturassp.services.dto.PathDTO;
 import br.com.rafael.naturassp.model.Categoria;
 import br.com.rafael.naturassp.model.Produto;
 import br.com.rafael.naturassp.services.IProdutoService;
@@ -22,6 +24,7 @@ import br.com.rafael.naturassp.services.IUploadService;
 
 @RestController
 @RequestMapping(value = "/produto")
+@CrossOrigin("*")
 public class ProdutoController {
 	
 	@Autowired
@@ -43,10 +46,12 @@ public class ProdutoController {
 	}
 	
 	@PostMapping("/upload")
-	public ResponseEntity<String> uploadFoto(@RequestParam(name="arquivo") MultipartFile arquivo){
+	public ResponseEntity<PathDTO> uploadFoto(@RequestParam(name="arquivo") MultipartFile arquivo){
 		String path = upload.uploadService(arquivo);
 		if(path!= null) {
-			return ResponseEntity.status(201).body(path);
+			PathDTO pathDTO = new PathDTO();
+			pathDTO.setPathFile(path);
+			return ResponseEntity.status(201).body(pathDTO);
 			
 		}
 		
@@ -54,8 +59,8 @@ public class ProdutoController {
 	}
 	
 	@GetMapping
-	public ArrayList<Produto> recuperarTodos(){
-		return service.listarTodos();
+	public ResponseEntity<ArrayList<Produto>> recuperarTodosDisponiveis(){
+		return ResponseEntity.ok(service.listarDisponiveis());
 	}
 	
 	@GetMapping("/categoria/{id}")
@@ -75,5 +80,21 @@ public class ProdutoController {
 		return ResponseEntity.notFound().build();
 		
 	}
+	
+	@GetMapping("/busca")
+	public ResponseEntity<ArrayList<Produto>> buscaPorPalavraChave(@RequestParam (name = "key") String key){
+		System.out.println("key + " + key);
+		if(key != null ) {
+			return ResponseEntity.ok(service.listarPorPalavraChave(key));
+		}
+		return ResponseEntity.badRequest().build();
+		
+	}
+	
+	@GetMapping("/recuperarTodos")
+	public ResponseEntity<ArrayList<Produto>> recuperarTodos(){
+		return ResponseEntity.ok(service.listarTodos());
+	}
+	
 
 }

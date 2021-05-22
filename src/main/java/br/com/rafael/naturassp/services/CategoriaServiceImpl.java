@@ -64,4 +64,26 @@ public class CategoriaServiceImpl  implements ICategoriaService{
 		
 	}
 
+	@Override
+	public Categoria recuperarPorId(int id) {
+		try {
+			if(id != 0) {
+				return categoriaDao.findById(id).get();
+			}
+		} catch (Exception e) {
+			throw new ObjectNotFoundException("Objeto da Categoria com Id " + id +" não encontrado");
+		}
+		return null;
+	}
+	
+	
+	
+
+	@Override
+	public ArrayList<Categoria> recuperarTodasOrdenadasPorId() {
+		return categoriaDao.findAllByOrderById();
+	}
+	
+	
+
 }

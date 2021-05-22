@@ -11,5 +11,9 @@ public interface ClienteDao extends CrudRepository<Cliente, Integer> {
 	
 	// Metodo responsavel por retornar uma palavra chave
 	public Cliente findByEmailOrTelefone(String email,String telefone);
+	
+	//public Cliente findByTelefone(String telefone);
+	
+	public Cliente findByCpf(String cpf);
 
 }

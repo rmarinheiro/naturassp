@@ -82,4 +82,15 @@ public class ProdutoSeviceImpl implements IProdutoService {
 		return produtoDao.findById(idProduto).orElseThrow(()-> new ObjectNotFoundException("Erro ao Buscar o Produto de id" + idProduto) );
 	}
 
+	@Override
+	public ArrayList<Produto> listarPorPalavraChave(String key) {
+		// TODO Auto-generated method stub
+		return produtoDao.findByNomeContainingOrDetalheContaining(key,key);
+	}
+
+	@Override
+	public ArrayList<Produto> listarDestaques() {
+		return produtoDao.findAllByDestaque(1);
+	}
+
 }

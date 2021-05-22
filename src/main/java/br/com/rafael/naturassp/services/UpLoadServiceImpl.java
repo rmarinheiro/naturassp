@@ -23,11 +23,11 @@ public class UpLoadServiceImpl implements IUploadService {
 		try {
 			
 			System.out.println("DEBUG " + arquivo.getOriginalFilename());
-			String caminho = "C:\\Users\\rsmar\\Pictures\\Saved Pictures";
+			String caminho = "C:\\Users\\rsmar\\Documents\\CursoIsidro\\naturasspadmin\\naturasspadmin\\src\\images";
 			Path path= Paths.get(caminho + File.separator + arquivo.getOriginalFilename());
 			Files.copy(arquivo.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("DEBUG -- Arquivo copiado");
-			return path.toString();
+			return arquivo.getOriginalFilename();
 		} catch (Exception ex) {
 			throw new FileNotFoundException("Ocorreu um erro ao carregar a imagem" + ex.getMessage() );
 			

@@ -18,17 +18,17 @@ public class Categoria {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_categoria")
-	private Integer id_categoria;
+	private Integer id;
 	
 	@Column(name = "nome_categoria",length = 100, nullable = false,unique = true)
 	@Size(min = 2 , max = 100 , message = "Para Cadastrar uma categoria é necessario de 2 à 100 caracteres")
 	private String nome;
 	
 	public Integer getId_categoria() {
-		return id_categoria;
+		return id;
 	}
 	public void setId_categoria(Integer id_categoria) {
-		this.id_categoria = id_categoria;
+		this.id = id_categoria;
 	}
 	public String getNome() {
 		return nome;

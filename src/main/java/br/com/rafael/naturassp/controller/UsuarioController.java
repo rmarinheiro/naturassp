@@ -2,6 +2,7 @@ package br.com.rafael.naturassp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import br.com.rafael.naturassp.services.IUsuarioService;
 
 @RestController
 @RequestMapping(value = "/login")
+@CrossOrigin("*")
 public class UsuarioController {
 	
 	@Autowired
@@ -23,7 +25,7 @@ public class UsuarioController {
 	public ResponseEntity<JWToken> fazerLogin(@RequestBody Usuario dadosLogin){
 		Usuario user = service.recuperarUsuario(dadosLogin);
 		if(user != null) { // usuario existente preciso conferir a senha
-			if(user.getSenha().equals(dadosLogin.getSenha())){
+			
 				// aqui eu crio o token do usuario
 				
 				JWToken token = new JWToken(JWTTokenUtils.generateToken(user));
@@ -33,10 +35,8 @@ public class UsuarioController {
 				return ResponseEntity.ok(token);
 			}
 			
-			return ResponseEntity.status(403).build();
-		}
 		
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.status(403).build();
 		
 	}
 	

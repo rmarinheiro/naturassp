@@ -16,18 +16,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.PastOrPresent;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tbl_pedido")
+
 public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_pedido")
 	private Integer idPedido;
 	
-	@Column(name="data_pedido",nullable = false)
-	@PastOrPresent(message = "A data do pedido não deve ser futura")
+	@Column(name="data_pedido")
 	private LocalDate dataPedido;
 	
 	@Column(name="valor_total",nullable = false)

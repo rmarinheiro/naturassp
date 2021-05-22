@@ -9,26 +9,23 @@ import br.com.rafael.naturassp.model.Pedido;
 
 @Component
 public class PedidoServiceImpl implements IPedidoService {
-	
+
 	@Autowired
 	private PedidoDao dao;
 
 	@Override
 	public Pedido inserirNovo(Pedido novo) {
 		try {
-			double total =0.0;
-			for(ItemPedido item : novo.getItensPedido()) {
-			
+			double total = 0.0;
+			for (ItemPedido item : novo.getItensPedido()) {
+
 				item.setPreco(item.getProduto().getPreco());
-				
-				if(item.getQtd_item() >= 5) {
-					item.setPreco_total(item.getPreco()* item.getQtd_item()* 0.8);
-				}else {
-					item.setPreco_total(item.getPreco()* item.getQtd_item());
-				}
-				total+= item.getPreco_total();
+
+				item.setPreco_total(item.getPreco() * item.getQtd_item());
+
+				total += item.getPreco_total();
 			}
-			for(ItemPedido itemPedido:novo.getItensPedido()) {
+			for (ItemPedido itemPedido : novo.getItensPedido()) {
 				itemPedido.setPedido(novo);
 			}
 			novo.setValorTotal(total);
@@ -38,8 +35,7 @@ public class PedidoServiceImpl implements IPedidoService {
 			System.out.println(e.getMessage());
 			return null;
 		}
-		
-		
+
 	}
 
 }

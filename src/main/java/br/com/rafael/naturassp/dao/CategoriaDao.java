@@ -10,5 +10,9 @@ public interface CategoriaDao extends CrudRepository<Categoria, Integer> {
 	
 	// Metodo responsavel por retornar uma palavra chave
 	public ArrayList<Categoria> findByNomeContaining(String palavra);
+	
+	public ArrayList<Categoria> findAllByOrderById();
+	
+	
 
 }

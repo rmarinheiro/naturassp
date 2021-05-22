@@ -6,7 +6,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +22,7 @@ import br.com.rafael.naturassp.services.ICategoriaService;
 
 @RestController
 @RequestMapping(value = "/categorias")
+@CrossOrigin("*")
 public class CategoriaController {
 	
 	@Autowired
@@ -58,6 +61,25 @@ public class CategoriaController {
 		}
 		
 		return ResponseEntity.badRequest().build();
+	}
+	
+	
+	//endpoint com autorização para buscar detalhes por categoria
+	@GetMapping("/{id}")
+	public ResponseEntity<Categoria> recuperaDetalhes(@PathVariable(name = "id") int id){
+		Categoria resultado = service.recuperarPorId(id);
+		if(resultado != null) {
+			return ResponseEntity.ok(resultado);
+		}
+		
+		return ResponseEntity.badRequest().build();
+		
+	}
+	
+	@GetMapping("/categoriaById")
+	public ResponseEntity<ArrayList<Categoria>> recuperarTodasOrdenadasPorId(){
+		return ResponseEntity.ok(service.recuperarTodasOrdenadasPorId());
+		
 	}
 
 }

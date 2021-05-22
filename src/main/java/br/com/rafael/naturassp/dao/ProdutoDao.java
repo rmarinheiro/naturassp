@@ -14,5 +14,9 @@ public interface ProdutoDao extends CrudRepository<Produto, Integer> {
 	public ArrayList<Produto> findAllByDisponivel(int disponivel);
 	
 	public ArrayList<Produto> findAllByDisponivelAndCategoria(int disponivel, Categoria cat);
+	
+	public ArrayList<Produto> findAllByDestaque(int destaque);
+	
+	public ArrayList<Produto> findByNomeContainingOrDetalheContaining(String keyNome, String keyDetalhe);
 
 }
