@@ -23,7 +23,7 @@ public class UpLoadServiceImpl implements IUploadService {
 		try {
 			
 			System.out.println("DEBUG " + arquivo.getOriginalFilename());
-			String caminho = "C:\\Users\\rsmar\\Documents\\CursoIsidro\\naturasspadmin\\naturasspadmin\\src\\images";
+			String caminho = "C:\\Users\\rsmar\\Documents\\CursoIsidro\\naturasspadmin\\naturasspadmin\\src\\assets\\images";
 			Path path= Paths.get(caminho + File.separator + arquivo.getOriginalFilename());
 			Files.copy(arquivo.getInputStream(),path,StandardCopyOption.REPLACE_EXISTING);
 			System.out.println("DEBUG -- Arquivo copiado");

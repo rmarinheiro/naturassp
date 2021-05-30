@@ -24,11 +24,12 @@ public class Categoria {
 	@Size(min = 2 , max = 100 , message = "Para Cadastrar uma categoria é necessario de 2 à 100 caracteres")
 	private String nome;
 	
-	public Integer getId_categoria() {
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId_categoria(Integer id_categoria) {
-		this.id = id_categoria;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;

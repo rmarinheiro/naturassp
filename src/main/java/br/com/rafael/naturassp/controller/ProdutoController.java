@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,7 +67,7 @@ public class ProdutoController {
 	@GetMapping("/categoria/{id}")
 	public ResponseEntity<ArrayList<Produto>> recuperarPorCategoria(@PathVariable(name="id") int idCateg){
 		Categoria cat = new Categoria();
-		cat.setId_categoria(idCateg);
+		cat.setId(idCateg);
 		return ResponseEntity.ok(service.listaPorCategoria(cat));
 	}
 	
@@ -96,5 +97,18 @@ public class ProdutoController {
 		return ResponseEntity.ok(service.listarTodos());
 	}
 	
+	@PutMapping("/atualizar/{idProduto}")
+	public ResponseEntity<Produto> atualizarProduto(@RequestBody Produto atual , @PathVariable int idProduto){
+		try {
+			if(idProduto != atual.getId()) {
+				return ResponseEntity.badRequest().build();
+			}
+			Produto prod = service.alterarProduto(atual);
+			return ResponseEntity.ok(prod);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ResponseEntity.badRequest().build();
+	}
 
 }

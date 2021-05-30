@@ -34,7 +34,7 @@ public class CategoriaServiceImpl  implements ICategoriaService{
 	@Override
 	public Categoria alterarCategoria(Categoria categoria) {
 		try {
-			if(categoria.getId_categoria()!=null && categoria.getNome()!= null && categoria.getNome().length() > 0) {
+			if(categoria.getId()!=null && categoria.getNome()!= null && categoria.getNome().length() > 0) {
 				return categoriaDao.save(categoria);
 			}
 			
