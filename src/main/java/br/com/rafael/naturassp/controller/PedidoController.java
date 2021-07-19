@@ -1,5 +1,6 @@
 package br.com.rafael.naturassp.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.validation.Valid;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.naturassp.services.dto.FiltroPedidoDTO;
+import br.com.naturassp.services.dto.VendasPorDataDTO;
 import br.com.rafael.naturassp.model.Cliente;
 import br.com.rafael.naturassp.model.Pedido;
 import br.com.rafael.naturassp.services.IClienteService;
@@ -44,11 +47,11 @@ public class PedidoController {
 		return ResponseEntity.status(400).build();
 	}
 	
-	@GetMapping()
+	/*@GetMapping()
 	public ResponseEntity<ArrayList<Pedido>> recuperarTodos(){
 		return ResponseEntity.ok(service.buscarTodos());
 		
-	}
+	}*/
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Pedido> alterarStatus(@PathVariable int id , @RequestParam(name = "status") int status){
@@ -65,5 +68,18 @@ public class PedidoController {
 		}
 		
 	}
-
+	
+	@GetMapping("/recentes")
+	public ResponseEntity<ArrayList<VendasPorDataDTO>> recuperarVendasMensal(@RequestParam("inicio") String dataIni,@RequestParam("fim") String dataFim){
+		LocalDate ini = LocalDate.parse(dataIni);
+		LocalDate fim = LocalDate.parse(dataFim);
+		return ResponseEntity.ok(service.recuperarTotaisMensal(ini,fim));
+	}
+	
+	@PostMapping("/filtrar")
+	public ResponseEntity<ArrayList<Pedido>> recuperarTodos(@RequestBody FiltroPedidoDTO filtroPedidoDTO){
+		return ResponseEntity.ok(service.filtrarPorVariosCriterios(filtroPedidoDTO));
+		
+	}
+	
 }

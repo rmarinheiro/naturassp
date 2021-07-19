@@ -6,6 +6,8 @@ import java.util.Collections;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import springfox.documentation.builders.PathSelectors;
@@ -67,5 +69,7 @@ public class NaturasspApplication {
 	private ResponseMessage simpleMessage(int code, String msg) {
 		return new ResponseMessageBuilder().code(code).message(msg).build();
 	}
+	
+	
 
 }

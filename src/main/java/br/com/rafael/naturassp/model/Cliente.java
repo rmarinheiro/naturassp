@@ -164,6 +164,23 @@ public class Cliente {
 	}
 	
 	
+	public Cliente() {
+	}
+
+	public Cliente(String nome, String email, LocalDate dataNasc ,String telefone) {
+		super();
+		this.nome = nome;
+		this.email = email;
+		this.dataNasc = dataNasc;
+		this.telefone = telefone;
+	
+	}
+
+
+
+	
+	
+	
 	
 
 	

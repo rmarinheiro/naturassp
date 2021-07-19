@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tbl_usuario")
@@ -21,6 +23,7 @@ public class Usuario {
 	private String username;
 	
 	@Column(name = "email",length = 50, nullable = false, unique = true)
+	@NotEmpty(message = "Campo email não pode ser nuloo ou vazio")
 	@Email(message = "Entre com email válido")
 	private String email;
 	
@@ -28,7 +31,10 @@ public class Usuario {
 	private String senha;
 	
 	@Column(name = "nome_usuario",length = 50, nullable = false)
-	private String nome_usuario;
+	private String nome;
+	
+	@Column(name="usuario_ativo")
+	private Integer ativo;
 
 	public Integer getId_usuario() {
 		return id_usuario;
@@ -62,13 +68,25 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public String getNome_usuario() {
-		return nome_usuario;
+	
+
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNome_usuario(String nome_usuario) {
-		this.nome_usuario = nome_usuario;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
+
+	public Integer getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
+	}
+	
+	
 	
 	
 	
