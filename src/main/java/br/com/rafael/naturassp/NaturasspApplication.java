@@ -52,6 +52,7 @@ public class NaturasspApplication {
 		.globalResponseMessage(RequestMethod.POST, Arrays.asList(m201, m403, m422, m500))
 		.globalResponseMessage(RequestMethod.PUT, Arrays.asList(m204put, m403, m404, m422, m500))
 		.globalResponseMessage(RequestMethod.DELETE, Arrays.asList(m204del, m403, m404, m500))
+		
 				
 		.select()
 		.apis(RequestHandlerSelectors.basePackage("br.com.rafael.naturassp.controller"))
